@@ -46,11 +46,11 @@ r_dict = r.json() #This returns a dictionary from the json object.
 print(r_dict['form']) #example: we want the value in the 'form' key
 """
 
-
-
 ####Playing with authentication###
 
 #passing credentials to the basic-auth method of authentication using a tuple
-r = requests.get("https://httpbin.org/basic-auth/corey/testing", auth=('corey', 'testing'))
+#note the addition of a 'timeout' parameter, this is because request.get will wait indefinitely for a response
+#even if the server hangs. Good idea if you dont want your script to run forever due to server errors.
+r = requests.get("https://httpbin.org/basic-auth/corey/testing", auth=('corey', 'testing'), timeout=10)
 
 print(r.text) #returns a successfull authentication if tuple matches the /username/password params in the url
